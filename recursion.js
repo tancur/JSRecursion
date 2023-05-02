@@ -227,5 +227,24 @@ let jsonString = stringify(table);
 console.log(JSON.parse(jsonString));
 
 
+// getElementById throw не работает
+
+function getElementById(idToFind) {
+  function walker(parent = document.body) {
+    for (const child of parent.children) {
+      if (child.id === idToFind) {
+        throw new Error (`"Dom element:"${child.tagName}`);
+      }
+      
+      walker(child);
+    }}
+    try {
+      walker(parent = document.body);
+    } catch (e) {
+      return e;
+    }
+  }
+  getElementById('one')
+
 
 
